@@ -18,7 +18,14 @@ const App = () => {
 
   return (
     <div>
-      <h1>Hello, {users.length > 0 ? users[0].name : "Guest"}!</h1>
+      <h1>Users:</h1>
+      <ul>
+        {users.map((user, index) => (
+          <li key={index}>
+            {user.name} ({user.email})
+          </li>
+        ))}
+      </ul>
       <button onClick={handleAddUser}>Add User</button>
     </div>
   );
