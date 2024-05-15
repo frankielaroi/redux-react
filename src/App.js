@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUsers, addUser } from "./redux/userReducer";
+import { setUser } from "./redux/userActions";
 
-function App() {
+const App = () => {
+  const users = useSelector((state) => state.users || []);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
+  const handleAddUser = () => {
+    const newUser = { name: "John Doe", email: "john@example.com" };
+    dispatch(addUser(newUser));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Hello, {users.length > 0 ? users[0].name : "Guest"}!</h1>
+      <button onClick={handleAddUser}>Add User</button>
     </div>
   );
-}
+};
 
 export default App;
