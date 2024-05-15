@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers, addUser } from "./redux/userReducer";
 import { setUser } from "./redux/userActions";
+import UserForm from "./components/userForm";
 
 const App = () => {
   const users = useSelector((state) => state.users || []);
@@ -26,7 +27,7 @@ const App = () => {
           </li>
         ))}
       </ul>
-      <button onClick={handleAddUser}>Add User</button>
+      <UserForm />
     </div>
   );
 };
